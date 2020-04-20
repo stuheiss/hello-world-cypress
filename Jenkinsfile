@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Build and Test') {
             steps {
-                sh "docker-compose -d up"
+                sh "docker-compose up -d"
                 ansiColor('xterm') {
                     sh "cd e2e; docker run --rm -v `pwd`:/e2e -w /e2e --network hello-world-cypress_default cypress/included:4.4.0 --config baseUrl=http://sentimentalyzer:8123"
                 }
