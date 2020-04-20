@@ -11,6 +11,15 @@ pipeline {
     }
 
     stages {
+        stage("Env Variables") {
+            steps {
+                sh "printenv"
+                sh "echo GIT_BRANCH = ${GIT_BRANCH}"
+                sh "echo BUILD_NUMBER = ${BUILD_NUMBER}"
+                sh "echo BUILD_ID = ${BUILD_ID}"
+                sh "echo PREFIX = ${PREFIX}"
+            }
+        }
         stage('Build and Test') {
             steps {
                 sh "docker-compose -p ${PREFIX} up -d"
