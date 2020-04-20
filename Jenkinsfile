@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        PREFIX = sh(returnStdout: true, script: "echo '${GIT_BRANCH}_${BUILD_NUMBER}_${BUILD_ID}'").replaceAll("-", "_").trim()
+        PREFIX = sh(returnStdout: true, script: "echo '${GIT_BRANCH}_${BUILD_NUMBER}_${BUILD_ID}'").replaceAll(/_|\-|\s/, "").trim()
     }
 
     options {
