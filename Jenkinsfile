@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        PREFIX = sh(returnStdout: true, script: "echo '${GIT_BRANCH}_${BUILD_NUMBER}_${BUILD_ID}'").trim()
+        PREFIX = sh(returnStdout: true, script: "echo '${GIT_BRANCH}_${BUILD_NUMBER}_${BUILD_ID}'").replaceAll("-", "_").trim()
     }
 
     options {
@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage("Env Variables") {
             steps {
-                sh "printenv"
+                sh "printenv | sort"
                 sh "echo GIT_BRANCH = ${GIT_BRANCH}"
                 sh "echo BUILD_NUMBER = ${BUILD_NUMBER}"
                 sh "echo BUILD_ID = ${BUILD_ID}"
